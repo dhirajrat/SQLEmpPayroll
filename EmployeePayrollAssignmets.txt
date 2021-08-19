@@ -69,3 +69,21 @@ mysql> SELECT * FROM employeepayroll;
 |  3 | Terisa | 200000 | 2019-11-13 |
 +----+--------+--------+------------+
 3 rows in set (0.00 sec)
+
+mysql> select salary from employeepayroll where name = 'Bill';
++--------+
+| salary |
++--------+
+| 100000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select * from employeepayroll where date between CAST('2018-01-01' as DATE) and DATE(NOW());
++----+--------+--------+--------+------------+
+| id | name   | gender | salary | date       |
++----+--------+--------+--------+------------+
+|  2 | Ben    | M      |  30000 | 2020-12-19 |
+|  3 | Terisa | F      | 500000 | 2019-11-13 |
++----+--------+--------+--------+------------+
+2 rows in set (0.06 sec)
+
