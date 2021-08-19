@@ -29,3 +29,12 @@ Query OK, 1 row affected (0.24 sec)
 
 mysql> use payroll_service;
 Database changed
+
+mysql> create table employee_payroll
+    -> (
+    -> id       INT unsigned NOT NULL AUTO_INCREMENT,
+    -> name     VARCHAR(150) NOT NULL,
+    -> salary   Double NOT NULL,
+    -> PRIMARY KEY      (id)
+    -> );
+Query OK, 0 rows affected (2.56 sec)
