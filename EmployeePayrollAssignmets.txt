@@ -30,11 +30,30 @@ Query OK, 1 row affected (0.24 sec)
 mysql> use payroll_service;
 Database changed
 
-mysql> create table employee_payroll
+mysql> create table employeepayroll
     -> (
     -> id       INT unsigned NOT NULL AUTO_INCREMENT,
     -> name     VARCHAR(150) NOT NULL,
     -> salary   Double NOT NULL,
+    -> date     DATE NOT NULL,
     -> PRIMARY KEY      (id)
     -> );
-Query OK, 0 rows affected (2.56 sec)
+Query OK, 0 rows affected (0.76 sec)
+
+mysql> DESCRIBE employeepayroll;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(150) | NO   |     | NULL    |                |
+| salary | double       | NO   |     | NULL    |                |
+| date   | date         | NO   |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+4 rows in set (0.12 sec)
+
+mysql> INSERT INTO employeepayroll (name, salary, date) VALUES
+    -> ( 'Bill' ,100000.00, '2015-01-03' ),
+    -> ( 'Ben', 30000.00, '2020-12-19' ),
+    -> ( 'Terisa' ,200000.00, '2019-11-13' );
+Query OK, 3 rows affected (0.55 sec)
+Records: 3  Duplicates: 0  Warnings: 0
