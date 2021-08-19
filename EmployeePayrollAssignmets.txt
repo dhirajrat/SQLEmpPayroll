@@ -40,6 +40,8 @@ mysql> create table employeepayroll
     -> );
 Query OK, 0 rows affected (0.76 sec)
 
+#describetable
+
 mysql> DESCRIBE employeepayroll;
 +--------+--------------+------+-----+---------+----------------+
 | Field  | Type         | Null | Key | Default | Extra          |
