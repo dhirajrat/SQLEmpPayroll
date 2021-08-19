@@ -87,3 +87,57 @@ mysql> select * from employeepayroll where date between CAST('2018-01-01' as DAT
 +----+--------+--------+--------+------------+
 2 rows in set (0.06 sec)
 
+mysql> ALTER TABLE employeepayroll ADD gender CHAR(1) AFTER name;
+Query OK, 0 rows affected (3.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM employeepayroll;
++----+--------+--------+--------+------------+
+| id | name   | gender | salary | date       |
++----+--------+--------+--------+------------+
+|  1 | Bill   | NULL   | 100000 | 2015-01-03 |
+|  2 | Ben    | NULL   |  30000 | 2020-12-19 |
+|  3 | Terisa | NULL   | 200000 | 2019-11-13 |
++----+--------+--------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update employeepayroll set gender = 'F' where name = 'Teresa';
+Query OK, 0 rows affected (0.06 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> SELECT * FROM employeepayroll;
++----+--------+--------+--------+------------+
+| id | name   | gender | salary | date       |
++----+--------+--------+--------+------------+
+|  1 | Bill   | NULL   | 100000 | 2015-01-03 |
+|  2 | Ben    | NULL   |  30000 | 2020-12-19 |
+|  3 | Terisa | NULL   | 200000 | 2019-11-13 |
++----+--------+--------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update employeepayroll set gender = 'm' where name = 'Terisa';
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employeepayroll set gender = 'F' where name = 'Terisa';
+Query OK, 1 row affected (0.13 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employeepayroll set gender = 'M' where name = 'Bill';
+Query OK, 1 row affected (0.13 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employeepayroll set gender = 'M' where name = 'Ben';
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM employeepayroll;
++----+--------+--------+--------+------------+
+| id | name   | gender | salary | date       |
++----+--------+--------+--------+------------+
+|  1 | Bill   | M      | 100000 | 2015-01-03 |
+|  2 | Ben    | M      |  30000 | 2020-12-19 |
+|  3 | Terisa | F      | 200000 | 2019-11-13 |
++----+--------+--------+--------+------------+
+3 rows in set (0.00 sec)
+
