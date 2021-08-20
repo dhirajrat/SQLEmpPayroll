@@ -181,3 +181,80 @@ mysql> SELECT id,COUNT(id),AVG(salary) FROM employeepayroll WHERE gender='M';
 |    1 |         2 |       65000 |
 +------+-----------+-------------+
 1 row in set (0.00 sec)
+
+mysql> ALTER TABLE employeepayroll add phone varchar(150);
+Query OK, 0 rows affected (3.32 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employeepayroll;
++----+--------+--------+--------+------------+-------+
+| id | name   | gender | salary | date       | phone |
++----+--------+--------+--------+------------+-------+
+|  1 | Bill   | M      | 100000 | 2015-01-03 | NULL  |
+|  2 | Ben    | M      |  30000 | 2020-12-19 | NULL  |
+|  3 | Terisa | F      | 500000 | 2019-11-13 | NULL  |
++----+--------+--------+--------+------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE employeepayroll add address varchar(150) not null after phone;
+Query OK, 0 rows affected (0.78 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employeepayroll add department varchar(160) not null after address;
+Query OK, 0 rows affected (1.57 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employeepayroll;
++----+--------+--------+--------+------------+-------+---------+------------+
+| id | name   | gender | salary | date       | phone | address | department |
++----+--------+--------+--------+------------+-------+---------+------------+
+|  1 | Bill   | M      | 100000 | 2015-01-03 | NULL  |         |            |
+|  2 | Ben    | M      |  30000 | 2020-12-19 | NULL  |         |            |
+|  3 | Terisa | F      | 500000 | 2019-11-13 | NULL  |         |            |
++----+--------+--------+--------+------------+-------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE employeepayroll alter address set default 'IND';
+Query OK, 0 rows affected (0.21 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe employeepayroll;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(150) | NO   |     | NULL    |                |
+| gender     | char(1)      | YES  |     | NULL    |                |
+| salary     | double       | NO   |     | NULL    |                |
+| date       | date         | NO   |     | NULL    |                |
+| phone      | varchar(150) | YES  |     | NULL    |                |
+| address    | varchar(150) | NO   |     | IND     |                |
+| department | varchar(160) | NO   |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+8 rows in set (0.28 sec)
+
+mysql> select * from employeepayroll;
++----+--------+--------+--------+------------+-------+---------+------------+
+| id | name   | gender | salary | date       | phone | address | department |
++----+--------+--------+--------+------------+-------+---------+------------+
+|  1 | Bill   | M      | 100000 | 2015-01-03 | NULL  |         |            |
+|  2 | Ben    | M      |  30000 | 2020-12-19 | NULL  |         |            |
+|  3 | Terisa | F      | 500000 | 2019-11-13 | NULL  |         |            |
++----+--------+--------+--------+------------+-------+---------+------------+
+3 rows in set (0.03 sec)
+
+mysql> INSERT INTO employeepayroll
+    -> (name, department, gender, date, salary) VALUES
+    -> ('Terisa', 'Marketing', 'F', '2019-10-02', '2500000');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> select * from employeepayroll;
++----+--------+--------+---------+------------+-------+---------+------------+
+| id | name   | gender | salary  | date       | phone | address | department |
++----+--------+--------+---------+------------+-------+---------+------------+
+|  1 | Bill   | M      |  100000 | 2015-01-03 | NULL  |         |            |
+|  2 | Ben    | M      |   30000 | 2020-12-19 | NULL  |         |            |
+|  3 | Terisa | F      |  500000 | 2019-11-13 | NULL  |         |            |
+|  4 | Terisa | F      | 2500000 | 2019-10-02 | NULL  | IND     | Marketing  |
++----+--------+--------+---------+------------+-------+---------+------------+
+4 rows in set (0.03 sec)
